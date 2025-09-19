@@ -359,9 +359,10 @@ function grabAndThrow(fish) {
     fish.rotation.set(-Math.PI/6, isRight?Math.PI/2:-Math.PI/2, Math.PI);
     const easeInOut = (TWEEN.Easing && TWEEN.Easing.Sine && TWEEN.Easing.Sine.InOut) || ((k)=>k);
     const easeOut = (TWEEN.Easing && TWEEN.Easing.Sine && TWEEN.Easing.Sine.Out) || ((k)=>k);
+    arm.rotation.x = -0.8; // start LOWER, then go UP, then DOWN to throw
     const bend1 = new TWEEN.Tween(bear.rotation).to({ x: 0.28 }, 140).easing(easeInOut);
-    const prep  = new TWEEN.Tween(arm.rotation).to({ x: 0.6 }, 140).easing(easeInOut);
-    const throwTw = new TWEEN.Tween(arm.rotation).to({ x: -1.25 }, 180).easing(easeOut).onStart(()=>{
+    const raise = new TWEEN.Tween(arm.rotation).to({ x: 0.6 }, 160).easing(easeInOut);
+    const downThrow = new TWEEN.Tween(arm.rotation).to({ x: -1.25 }, 180).easing(easeOut).onStart(()=>{
         if (fish.parent) hand.remove(fish), scene.add(fish);
         fish.userData.thrown = true;
         const dir = isRight?1:-1;
@@ -370,7 +371,7 @@ function grabAndThrow(fish) {
         playSFX(sounds.whoosh);
     });
     const recover = new TWEEN.Tween(bear.rotation).to({ x: 0 }, 220).easing(easeOut);
-    bend1.start(); prep.start(); bend1.chain(recover); prep.chain(throwTw);
+    bend1.start(); raise.start(); bend1.chain(recover); raise.chain(downThrow);
 }
 
 export function setScoreLive(newScore) {
