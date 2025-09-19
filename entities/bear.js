@@ -35,27 +35,25 @@ export function createBear(type = 'splashy') {
     group.add(createVoxel(-0.5, -1, 0, 0.5, 0.5, 0.5, bodyMat));
     group.add(createVoxel(0.5, -1, 0, 0.5, 0.5, 0.5, bodyMat));
 
-    const armY = 0.1, armZ = 0.1; // moved arms slightly forward to avoid occlusion
+    const armY = 0.8, armZ = 0.0; // restore natural shoulder height and alignment
     const armWidth = 0.4, armHeight = 1.0, armDepth = 0.4;
     
     // Left Arm
     const leftArm = new THREE.Group(); leftArm.name = 'leftArm';
     const leftArmMesh = createVoxel(0, 0, 0, armWidth, armHeight, armDepth, bodyMat);
-    leftArm.add(leftArmMesh);
+    leftArm.add(leftArmMesh); leftArmMesh.position.set(0, -armHeight/2, 0); // pivot at shoulder
     const leftHandAnchor = new THREE.Object3D(); leftHandAnchor.name = 'leftHandAnchor';
-    leftHandAnchor.position.set(0, -armHeight/2, 0); leftArm.add(leftHandAnchor);
-    leftArm.position.set(-0.95, armY, armZ); leftArm.rotation.z = Math.PI/20; // flipped to bend the other way
-    leftArm.rotation.y = -Math.PI / 10; // angle inward toward the torso
+    leftHandAnchor.position.set(0, -armHeight, 0); leftArm.add(leftHandAnchor);
+    leftArm.position.set(-0.95, armY, armZ); leftArm.rotation.set(0, 0, 0);
     group.add(leftArm);
 
     // Right Arm
     const rightArm = new THREE.Group(); rightArm.name = 'rightArm';
     const rightArmMesh = createVoxel(0, 0, 0, armWidth, armHeight, armDepth, bodyMat);
-    rightArm.add(rightArmMesh);
+    rightArm.add(rightArmMesh); rightArmMesh.position.set(0, -armHeight/2, 0); // pivot at shoulder
     const rightHandAnchor = new THREE.Object3D(); rightHandAnchor.name = 'rightHandAnchor';
-    rightHandAnchor.position.set(0, -armHeight/2, 0); rightArm.add(rightHandAnchor);
-    rightArm.position.set(0.95, armY, armZ); rightArm.rotation.z = -Math.PI/20; // flipped to bend the other way
-    rightArm.rotation.y = Math.PI / 10; // angle inward toward the torso
+    rightHandAnchor.position.set(0, -armHeight, 0); rightArm.add(rightHandAnchor);
+    rightArm.position.set(0.95, armY, armZ); rightArm.rotation.set(0, 0, 0);
     group.add(rightArm);
     
     group.position.set(0, 4.65, 0.8); // Adjusted Y to be on top of the log.
