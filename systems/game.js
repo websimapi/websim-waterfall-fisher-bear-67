@@ -129,7 +129,7 @@ function setupShowcaseAnimation() {
     const easingInOut = (TWEEN.Easing && TWEEN.Easing.Sine && TWEEN.Easing.Sine.InOut) || (TWEEN.Easing?.Linear?.None) || ((k)=>k);
     TWEEN.removeAll();
     const arm = showcaseBear.getObjectByName('rightArm');
-    if (arm?.rotation) new TWEEN.Tween(arm.rotation).to({ x: -0.35 }, 900).easing(easingInOut).yoyo(true).repeat(Infinity).start();
+    if (arm?.rotation) new TWEEN.Tween(arm.rotation).to({ x: 0.35 }, 900).easing(easingInOut).yoyo(true).repeat(Infinity).start();
     if (showcaseFish) {
         // lock fish at hand; animate only tail + body segments for a held wiggle
         const wiggle = { t: 0 };
@@ -359,9 +359,9 @@ function grabAndThrow(fish) {
     fish.rotation.set(-Math.PI/6, isRight?Math.PI/2:-Math.PI/2, Math.PI);
     const easeInOut = (TWEEN.Easing && TWEEN.Easing.Sine && TWEEN.Easing.Sine.InOut) || ((k)=>k);
     const easeOut = (TWEEN.Easing && TWEEN.Easing.Sine && TWEEN.Easing.Sine.Out) || ((k)=>k);
-    const bend1 = new TWEEN.Tween(bear.rotation).to({ x: -0.28 }, 140).easing(easeInOut);
-    const prep  = new TWEEN.Tween(arm.rotation).to({ x: -0.6 }, 140).easing(easeInOut);
-    const throwTw = new TWEEN.Tween(arm.rotation).to({ x: 1.25 }, 180).easing(easeOut).onStart(()=>{
+    const bend1 = new TWEEN.Tween(bear.rotation).to({ x: 0.28 }, 140).easing(easeInOut);
+    const prep  = new TWEEN.Tween(arm.rotation).to({ x: 0.6 }, 140).easing(easeInOut);
+    const throwTw = new TWEEN.Tween(arm.rotation).to({ x: -1.25 }, 180).easing(easeOut).onStart(()=>{
         if (fish.parent) hand.remove(fish), scene.add(fish);
         fish.userData.thrown = true;
         const dir = isRight?1:-1;
