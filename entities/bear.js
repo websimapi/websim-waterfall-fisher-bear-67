@@ -45,6 +45,7 @@ export function createBear(type = 'splashy') {
     const leftHandAnchor = new THREE.Object3D(); leftHandAnchor.name = 'leftHandAnchor';
     leftHandAnchor.position.set(0, -armHeight/2, 0); leftArm.add(leftHandAnchor);
     leftArm.position.set(-0.95, armY, armZ); leftArm.rotation.z = Math.PI/20; // flipped to bend the other way
+    leftArm.rotation.y = Math.PI / 10; // angle inward toward the torso
     group.add(leftArm);
 
     // Right Arm
@@ -54,6 +55,7 @@ export function createBear(type = 'splashy') {
     const rightHandAnchor = new THREE.Object3D(); rightHandAnchor.name = 'rightHandAnchor';
     rightHandAnchor.position.set(0, -armHeight/2, 0); rightArm.add(rightHandAnchor);
     rightArm.position.set(0.95, armY, armZ); rightArm.rotation.z = -Math.PI/20; // flipped to bend the other way
+    rightArm.rotation.y = -Math.PI / 10; // angle inward toward the torso
     group.add(rightArm);
     
     group.position.set(0, 4.65, 0.8); // Adjusted Y to be on top of the log.
